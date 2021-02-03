@@ -2,16 +2,12 @@
 
 /* --------------------------------------------------------------------------*/
 
-// Global application state
+// Application state, set to initial values
 let app_state = {
     volume_level: 100,
     horn_aud_src: "./assets/media/audio/air-horn.mp3",
     horn_img_src: "./assets/media/images/air-horn.svg",
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-    honk_btn.type = "button";
-});
 
 /* --------------------------------------------------------------------------*/
 // Volume
@@ -81,8 +77,10 @@ par_s_btn.addEventListener("click", () => {
     update_horn_img_src("./assets/media/images/party-horn.svg");
 }, false);
 
-honk_btn.addEventListener("click", () => {
-    new Audio(audio.src).play();
+honk_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    audio.play();
     return false;
 }, true);
 
